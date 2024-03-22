@@ -5,8 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddScoped<HttpClient>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -23,11 +25,11 @@ app.UseAntiforgery();
 
 const string cspPolicy = "default-src 'self'";
 
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Content-Security-Policy", cspPolicy);
-    await next();
-});
+// app.Use(async (context, next) =>
+// {
+//     context.Response.Headers.Add("Content-Security-Policy", cspPolicy);
+//     await next();
+// });
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
