@@ -8,4 +8,8 @@
         <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\Modules\" />
+    </ItemGroup>
+
 </Project>
