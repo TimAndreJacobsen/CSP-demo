@@ -21,6 +21,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
+const string cspPolicy = "default-src 'self'";
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy", cspPolicy);
+    await next();
+});
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
